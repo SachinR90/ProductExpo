@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">ProductExposition</string>
+    <string name="app_name">Product Expo Demo</string>
+
+    <!--Yes_No_OK_Cancel Dialog -->
+    <string name="str_yes">Yes</string>
+    <string name="str_no">No</string>
+    <string name="str_ok">OK</string>
+    <string name="str_cancel">Cancel</string>
+    <string name="str_unable_to_connect_to_server">Unable to connect to server</string>
+
 </resources>
