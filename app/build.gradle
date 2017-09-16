@@ -8,6 +8,7 @@ android {
         minSdkVersion 16
         versionCode 1
         versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
         buildConfigField 'boolean', 'IS_IN_DEBUG', 'true'
     }
     buildTypes {

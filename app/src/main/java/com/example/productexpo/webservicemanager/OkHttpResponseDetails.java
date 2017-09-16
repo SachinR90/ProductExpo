@@ -16,7 +16,7 @@ import okhttp3.Response;
  * Also Note that the Response here is always in String format to cast it to your liking</b></p><br><br>
  * Created by SachinR on 28/Jan/2017.
  */
-class OkHttpResponseDetails implements Parcelable {
+public class OkHttpResponseDetails implements Parcelable {
     public static final Parcelable.Creator<OkHttpResponseDetails> CREATOR = new Parcelable.Creator<OkHttpResponseDetails>() {
         @Override
         public OkHttpResponseDetails createFromParcel(Parcel source) {

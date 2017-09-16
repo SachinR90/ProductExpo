@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+    >
+
+
+    <LinearLayout
+        android:id="@+id/ll_price_holder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="end|center"
+        >
+
+        <TextView
+            android:id="@+id/textView"
+            style="@style/textMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:gravity="end|top"
+            android:padding="5dp"
+            android:text="@string/str_total_price"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            tools:text="Total Price  =  \u20B920"
+            />
+    </LinearLayout>
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/ll_price_holder"
+        android:background="@color/white"
+        >
+
+        <com.example.productexpo.customviews.EmptyRecyclerView
+            android:id="@+id/rv_product"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            />
+
+        <LinearLayout
+            android:id="@+id/ll_history_empty_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            >
+
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="@color/colorPrimaryLight"
+                app:srcCompat="@drawable/vc_empty_shopping_cart"
+                />
+
+            <android.support.v7.widget.AppCompatTextView
+                style="@style/lightMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/str_cart_empty"
+                />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_book_now"
+                style="@style/lightMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/str_add_products_now"
+                />
+        </LinearLayout>
+    </FrameLayout>
+</RelativeLayout>

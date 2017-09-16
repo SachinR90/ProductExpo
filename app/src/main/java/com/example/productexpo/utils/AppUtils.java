@@ -252,27 +252,5 @@ public class AppUtils {
             ex.printStackTrace();
         }
         return "";
-
     }
-
-    public static boolean isDouble(String str) {
-        try {
-            //noinspection ResultOfMethodCallIgnored
-            Double.parseDouble(str);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    public static Double getAmount(String tvAmount) {
-        Double amount;
-        if (isDouble(tvAmount)) {
-            amount = Double.parseDouble(tvAmount);
-            return amount;
-        } else {
-            return null;
-        }
-    }
-
 }

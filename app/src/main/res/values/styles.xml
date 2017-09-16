@@ -1,3 +1,30 @@
 <resources>
 
+    <style name="CommonTabLayout">
+        <item name="android:layout_height">38dp</item>
+        <item name="tabGravity">fill</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabIndicatorHeight">0dp</item>
+        <item name="tabTextColor">@color/colorPrimaryDark</item>
+        <item name="tabSelectedTextColor">@color/colorAccent</item>
+        <item name="tabBackground">@drawable/tab_drawable</item>
+    </style>
+
+    <style name="textSmall">
+        <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Small</item>
+    </style>
+
+    <style name="textMedium">
+        <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Medium
+        </item>
+    </style>
+
+    <style name="textLarge">
+        <item name="android:textAppearance">@android:style/TextAppearance.DeviceDefault.Large</item>
+    </style>
+
+    <style name="lightMedium" parent="textMedium">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPrimaryLight</item>
+    </style>
 </resources>
