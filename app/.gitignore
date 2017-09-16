@@ -1,0 +1,12 @@
+
+*.iml
+/.gradle
+/local.properties
+/build
+/.idea
+/gradle
+/gradlew
+/gradlew.bat
+/gradle.properties
+/app/build
+/keystore/fontello-46143285/debug.log
