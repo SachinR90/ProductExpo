@@ -1,4 +1,4 @@
-package com.example.productexposition.application;
+package com.example.productexpo.application;
 
 import android.app.Application;
 
