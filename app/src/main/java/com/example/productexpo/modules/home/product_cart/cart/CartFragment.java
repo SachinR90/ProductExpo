@@ -63,7 +63,8 @@ public class CartFragment extends BaseFragment implements CartView {
 
     @Override
     public void showProductGallery(Product product) {
-
+        ProductCartView parentFragment = (ProductCartView) getParentFragment();
+        parentFragment.loadGallery(product);
     }
 
     @Override

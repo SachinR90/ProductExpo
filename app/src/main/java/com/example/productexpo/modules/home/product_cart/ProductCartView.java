@@ -1,5 +1,6 @@
 package com.example.productexpo.modules.home.product_cart;
 
+import com.example.productexpo.entities.Product;
 import com.example.productexpo.modules.base.fragment.BaseFragmentView;
 
 /**
@@ -11,4 +12,7 @@ public interface ProductCartView extends BaseFragmentView {
      void switchToProductTab();
 
     void refreshList();
+
+    void loadGallery(Product product);
+
 }

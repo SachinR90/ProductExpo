@@ -1,6 +1,6 @@
 package com.example.productexpo.modules.home.product_cart.cart;
 
-import com.example.productexpo.modules.home.product_cart.ProductCartCallback;
+import com.example.productexpo.callbacks.ProductCartCallback;
 
 /**
  * Created on 9/17/2017.

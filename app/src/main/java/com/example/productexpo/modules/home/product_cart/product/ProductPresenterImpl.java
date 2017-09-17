@@ -23,7 +23,7 @@ import java.util.List;
  * Created on 9/17/2017.
  */
 
-public class ProductPresenterImpl implements ProductPresenter, SwipeRefreshLayout.OnRefreshListener,ItemClickListenerRV {
+public class ProductPresenterImpl implements ProductPresenter, SwipeRefreshLayout.OnRefreshListener, ItemClickListenerRV {
     ProductView productView;
     EmptyRecyclerView recyclerView;
     SwipeRefreshLayout mSwipeRefreshLayout;
@@ -72,7 +72,7 @@ public class ProductPresenterImpl implements ProductPresenter, SwipeRefreshLayou
     @Override
     public void restoreInstance(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
-            List<Product>  productList = savedInstanceState.getParcelableArrayList(KEY_PRODUCT_LIST);
+            List<Product> productList = savedInstanceState.getParcelableArrayList(KEY_PRODUCT_LIST);
             if (productList == null) {
                 productList = new ArrayList<>(0);
             }
@@ -82,7 +82,7 @@ public class ProductPresenterImpl implements ProductPresenter, SwipeRefreshLayou
 
     @Override
     public void saveInstance(Bundle outState) {
-        outState.putParcelableArrayList(KEY_PRODUCT_LIST,getProductList());
+        outState.putParcelableArrayList(KEY_PRODUCT_LIST, getProductList());
     }
 
     @Override
@@ -99,14 +99,16 @@ public class ProductPresenterImpl implements ProductPresenter, SwipeRefreshLayou
             try {
                 response.getProducts().add(product);
                 instance.setObjectAsString(Preferences.Key.KEY_CART_LIST, new Gson().toJson(response));
+                productView.showToast("Product added to cart successfully");
             } catch (Exception e) {
-
+                productView.showToast("Something went wrong");
             }
-        }else{
+        } else {
             response = new ProductResponse();
             response.setProducts(new ArrayList<Product>());
             response.getProducts().add(product);
             instance.setObjectAsString(Preferences.Key.KEY_CART_LIST, new Gson().toJson(response));
+            productView.showToast("Product added to cart successfully");
         }
     }
 
@@ -136,7 +138,7 @@ public class ProductPresenterImpl implements ProductPresenter, SwipeRefreshLayou
         Product product = (Product) data;
         switch (v.getId()) {
             case R.id.ll_home_grid_parent:
-                //show product gallery
+                productView.showProductGallery(product);
                 break;
             case R.id.btn_add_cart:
                 addProductToCartList(product);

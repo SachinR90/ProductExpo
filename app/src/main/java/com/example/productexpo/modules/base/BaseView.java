@@ -22,6 +22,8 @@ public interface BaseView {
      */
     void showProgress(String message);
 
+    void showToast(String message);
+
     /**
      * hide progress dialog
      */

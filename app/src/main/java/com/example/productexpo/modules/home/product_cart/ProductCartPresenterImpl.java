@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 
 import com.example.productexpo.R;
+import com.example.productexpo.callbacks.ProductCartCallback;
 import com.example.productexpo.data.Preferences;
 import com.example.productexpo.entities.Product;
 import com.example.productexpo.entities.ProductResponse;

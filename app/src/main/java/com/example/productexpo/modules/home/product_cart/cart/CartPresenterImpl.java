@@ -13,6 +13,7 @@ import com.example.productexpo.customviews.ItemClickListenerRV;
 import com.example.productexpo.data.Preferences;
 import com.example.productexpo.entities.Product;
 import com.example.productexpo.entities.ProductResponse;
+import com.example.productexpo.utils.AppUtils;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -136,6 +137,9 @@ public class CartPresenterImpl implements CartPresenter, View.OnClickListener,It
                         break;
                     }
                 }
+                if (AppUtils.isCollectionEmpty(response.getProducts())) {
+                    requestFocusOnEmptyView();
+                }
                 instance.setObjectAsString(Preferences.Key.KEY_CART_LIST, new Gson().toJson(response));
             } catch (Exception e) {
 
@@ -184,6 +188,7 @@ public class CartPresenterImpl implements CartPresenter, View.OnClickListener,It
                 cartView.callVendor(((Product) data).getPhoneNumber());
                 break;
             case R.id.ll_holder:
+                cartView.showProductGallery(((Product) data));
                 break;
         }
     }

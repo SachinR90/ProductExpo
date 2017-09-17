@@ -16,5 +16,9 @@
     <string name="str_pls_wait">Please wait</string>
     <string name="str_add_to_cart">Add to Cart</string>
     <string name="str_price">Price:</string>
+    <string name="str_select_a_product">Select a product to view gallery</string>
 
+    <!--Exit Messages-->
+    <string name="str_msg_title_exit_application">Exit Application ?</string>
+    <string name="str_msg_exit_application">Are you sure you want to exit ?</string>
 </resources>

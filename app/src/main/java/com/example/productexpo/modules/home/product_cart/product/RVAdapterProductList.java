@@ -59,9 +59,9 @@ public class RVAdapterProductList extends RecyclerView.Adapter<RecyclerView.View
 
 
         rootHolder.btnAddCart.setOnClickListener(this);
-        rootHolder.llHomeGridParent.setOnTouchListener(new CustomOnTouchListener());
+        rootHolder.llHomeGridParent.setOnClickListener(this);
 
-        rootHolder.btnAddCart.setOnClickListener(this);
+        rootHolder.btnAddCart.setOnTouchListener(new CustomOnTouchListener());
         rootHolder.llHomeGridParent.setOnTouchListener(new CustomOnTouchListener());
 
         rootHolder.btnAddCart.setTag(AppConstants.TAG_KEY, position);
@@ -97,8 +97,6 @@ public class RVAdapterProductList extends RecyclerView.Adapter<RecyclerView.View
             pos = (int) v.getTag(AppConstants.TAG_KEY);
             switch (v.getId()) {
                 case R.id.ll_home_grid_parent:
-                    //show product gallery
-                    break;
                 case R.id.btn_add_cart:
                     clickListener.onItemClick(v, pos, productList.get(pos), null);
                     break;

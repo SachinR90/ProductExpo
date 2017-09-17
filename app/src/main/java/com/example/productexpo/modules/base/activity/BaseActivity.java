@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.example.productexpo.R;
 import com.example.productexpo.utils.UIUtils;
@@ -83,5 +84,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseActi
         } else if (iAnimationCount == 1) {
             iAnimationCount++;
         }
+    }
+
+    @Override
+    public void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

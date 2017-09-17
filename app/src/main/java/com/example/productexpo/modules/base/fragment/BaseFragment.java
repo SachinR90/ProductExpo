@@ -118,4 +118,16 @@ public abstract class BaseFragment extends Fragment implements BaseFragmentView 
     public FragmentManager getChildManagerForFragment() {
         return getChildFragmentManager();
     }
+
+    @Override
+    public void showToast(String message) {
+        try {
+            ((BaseActivity) this.context).showToast(message);
+        } catch (Exception ex) {
+            try {
+                UIUtils.dismissLoader();
+            } catch (Exception ex1) {
+            }
+        }
+    }
 }

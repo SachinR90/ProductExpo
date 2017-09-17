@@ -1,9 +1,8 @@
-package com.example.productexpo.modules.home.product_cart;
+package com.example.productexpo.modules.product_details;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,26 +12,20 @@ import android.view.ViewGroup;
 import com.example.productexpo.R;
 import com.example.productexpo.entities.Product;
 import com.example.productexpo.modules.base.fragment.BaseFragment;
-import com.example.productexpo.modules.home.HomeView;
 
 /**
  * Created on 9/17/2017.
  */
 
-public class ProductCartFragment extends BaseFragment implements ProductCartView {
-    /**
-     * contains two tabs<br>
-     * <li> Product</li>
-     * <li> Cart</li>
-     */
-    private TabLayout tlProductCart;
-
+public class ProductDetailsFragment extends BaseFragment implements ProductDetailsView {
+    private final static String KEY_PRODUCT = "PRODUCT";
     /**
      * this holds Product Fragment and Cart Fragment
      */
-    private ViewPager vpProductCart;
+    private ViewPager vpProductDetails;
 
-    private ProductCartPresenter presenter;
+    private ProductDetailsPresenter presenter;
+    private Product product;
 
     /**
      * Creates a  new instance of this fragment using newInstance() method, Instead of standard constructor.
@@ -41,9 +34,10 @@ public class ProductCartFragment extends BaseFragment implements ProductCartView
      *
      * @return instance of the ProductCartFragment
      */
-    public static ProductCartFragment newInstance() {
+    public static ProductDetailsFragment newInstance(Product product) {
         Bundle args = new Bundle();
-        ProductCartFragment fragment = new ProductCartFragment();
+        ProductDetailsFragment fragment = new ProductDetailsFragment();
+        args.putParcelable(KEY_PRODUCT, product);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,8 +45,11 @@ public class ProductCartFragment extends BaseFragment implements ProductCartView
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new ProductCartPresenterImpl(this);
-        Log.i("CartProduct", "OnCreate");
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            product = arguments.getParcelable(KEY_PRODUCT);
+        }
+        presenter = new ProductDetailsPresenterImpl(this);
     }
 
     @Nullable
@@ -66,18 +63,17 @@ public class ProductCartFragment extends BaseFragment implements ProductCartView
 
     @Override
     public int getResId() {
-        return R.layout.fragment_product_cart;
+        return R.layout.fragment_product_details;
     }
 
     @Override
     public void initializeUIComponents(View v) {
-        //initialize tab layout
-        tlProductCart = (TabLayout) v.findViewById(R.id.tl_product_cart);
-        vpProductCart = (ViewPager) v.findViewById(R.id.vp_product_cart);
-
-        // make presenter to perform business logic on these two views
-        presenter.handleViewPager(vpProductCart);
-        presenter.handleTabLayout(tlProductCart);
+        vpProductDetails = (ViewPager) v.findViewById(R.id.vp_product_details);
+        View tvNoDataFound = v.findViewById(R.id.tv_no_data_found);
+        presenter.handlerViewPager(vpProductDetails,tvNoDataFound);
+        if (product != null) {
+            presenter.updateViewPager(product);
+        }
     }
 
     @Override
@@ -95,18 +91,9 @@ public class ProductCartFragment extends BaseFragment implements ProductCartView
     }
 
     @Override
-    public void switchToProductTab() {
-        presenter.selectProductTab();
-    }
-
-    @Override
-    public void refreshList() {
-        presenter.fetchProducts();
-    }
-
-    @Override
-    public void loadGallery(Product product) {
-        HomeView view = (HomeView) getActivity();
-        view.loadProductDetails(product);
+    public void updateContent(Product product) {
+        if (product != null && product.getProductGallery() != null) {
+            presenter.updateViewPager(product);
+        }
     }
 }

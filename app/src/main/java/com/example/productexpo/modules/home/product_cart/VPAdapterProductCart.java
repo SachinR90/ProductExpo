@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.SparseArray;
 import android.view.ViewGroup;
 
+import com.example.productexpo.callbacks.ProductCartCallback;
+
 import java.util.ArrayList;
 import java.util.List;
 

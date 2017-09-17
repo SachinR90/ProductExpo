@@ -6,4 +6,6 @@ package com.example.productexpo.data;
 
 public interface  AppConstants {
     int TAG_KEY = -999;
+    String KEY_PRODUCT_DETAIL = "PRODUCT_DETAIL";
+
 }
