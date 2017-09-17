@@ -2,6 +2,7 @@ package com.example.productexpo.modules.home;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
@@ -12,6 +13,7 @@ import com.example.productexpo.modules.base.ExitActivity;
 import com.example.productexpo.modules.base.activity.BaseActivity;
 import com.example.productexpo.modules.product_details.ProductDetailsActivity;
 import com.example.productexpo.modules.product_details.ProductDetailsFragment;
+import com.example.productexpo.utils.UIUtils;
 
 import static com.example.productexpo.data.AppConstants.KEY_PRODUCT_DETAIL;
 
@@ -43,7 +45,7 @@ public class HomeActivity extends BaseActivity implements HomeView {
     @Override
     public void loadProductDetails(Product product) {
         ProductDetailsFragment displayFrag = (ProductDetailsFragment) getSupportFragmentManager().findFragmentById(R.id.details_frag);
-        if (displayFrag == null) {
+        if (displayFrag == null || (UIUtils.getDeviceOrientation(this) == Configuration.ORIENTATION_PORTRAIT)) {
             // DisplayFragment (Fragment B) is not in the layout (handset layout),
             // so start DisplayActivity (Activity B)
             // and pass it the info about the selected item
