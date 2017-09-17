@@ -1,5 +1,6 @@
 package com.example.productexpo.modules.home;
 
+import android.content.res.Configuration;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
@@ -19,6 +20,11 @@ public class HomePresenterImpl implements HomePresenter {
 
     @Override
     public void showErrorMessage(int errorCode, String message) {
+
+    }
+
+    @Override
+    public void onConfigChanged(Configuration configuration) {
 
     }
 

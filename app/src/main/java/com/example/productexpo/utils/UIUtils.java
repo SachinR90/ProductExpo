@@ -2,6 +2,7 @@ package com.example.productexpo.utils;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
@@ -192,4 +193,28 @@ public class UIUtils {
         builder.setPositiveButton(positiveButtonText, okClickListener);
         builder.create().show();
     }
+
+    /**
+     * to check if the device is Phone or tablet
+     *
+     * @param context - current context of the application
+     * @return true/false based on device configuration
+     */
+    public static boolean isTablet(Context context) {
+        boolean isTablet;
+        isTablet = (context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+        return isTablet;
+    }
+
+    /**
+     * get current orientation of device
+     *
+     * @param context to get configuration
+     * @return orientation constant
+     */
+    public static int getDeviceOrientation(Context context) {
+        Configuration configuration = context.getResources().getConfiguration();
+        return configuration.orientation;
+    }
+
 }

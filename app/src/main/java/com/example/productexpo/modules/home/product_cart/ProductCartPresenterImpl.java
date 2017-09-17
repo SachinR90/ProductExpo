@@ -1,6 +1,8 @@
 package com.example.productexpo.modules.home.product_cart;
 
+import android.content.res.Configuration;
 import android.graphics.PorterDuff;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -21,22 +23,22 @@ import java.util.List;
 public class ProductCartPresenterImpl implements ProductCartPresenter {
     BaseFragmentView productCartView;
     ProductCartInteractor interactor;
-
+    VPAdapterProductCart adapterProductCart;
     private TabLayout tlProductCart;
     private ViewPager vpProductCart;
 
     public ProductCartPresenterImpl(BaseFragmentView productCartView) {
         this.productCartView = productCartView;
         interactor = new ProductCartInteractorImpl(this);
+        adapterProductCart = new VPAdapterProductCart(productCartView.getChildManagerForFragment());
+        adapterProductCart.add(0, ProductFragment.newInstance(), productCartView.getViewContext().getString(R.string.str_product_list));
+        adapterProductCart.add(1, CartFragment.newInstance(), productCartView.getViewContext().getString(R.string.str_cart_list));
     }
 
 
     @Override
     public void handleViewPager(ViewPager viewPager) {
         this.vpProductCart = viewPager;
-        VPAdapterProductCart adapterProductCart = new VPAdapterProductCart(productCartView.getChildManagerForFragment());
-        adapterProductCart.add(0, ProductFragment.newInstance(), productCartView.getViewContext().getString(R.string.str_product_list));
-        adapterProductCart.add(0, CartFragment.newInstance(), productCartView.getViewContext().getString(R.string.str_cart_list));
         this.vpProductCart.setAdapter(adapterProductCart);
         this.vpProductCart.setOffscreenPageLimit(2);
     }
@@ -56,6 +58,13 @@ public class ProductCartPresenterImpl implements ProductCartPresenter {
         this.tlProductCart.getTabAt(0).select();
         setTabColor(this.tlProductCart.getTabAt(0), R.color.white);
         setTabColor(this.tlProductCart.getTabAt(1), R.color.colorPrimaryDark);
+    }
+
+    @Override
+    public void selectCartTab() {
+        this.tlProductCart.getTabAt(1).select();
+        setTabColor(this.tlProductCart.getTabAt(1), R.color.white);
+        setTabColor(this.tlProductCart.getTabAt(0), R.color.colorPrimaryDark);
     }
 
     private void setTabColor(TabLayout.Tab tab, int color) {
@@ -89,8 +98,33 @@ public class ProductCartPresenterImpl implements ProductCartPresenter {
     }
 
     @Override
+    public void saveInstance(Bundle savedState) {
+        savedState.putInt(KEY_SELECTED_TAB, tlProductCart.getSelectedTabPosition());
+    }
+
+    @Override
+    public void restoreInstance(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            int selectedTabPosition = savedInstanceState.getInt(KEY_SELECTED_TAB);
+            if (selectedTabPosition == 0) {
+                selectProductTab();
+            }else{
+                selectCartTab();
+            }
+        }else{
+            selectProductTab();
+            fetchProducts();
+        }
+    }
+
+    @Override
     public void showErrorMessage(int errorCode, String message) {
         productCartView.showOKDialog("", message, "", null);
+    }
+
+    @Override
+    public void onConfigChanged(Configuration configuration) {
+
     }
 
 
@@ -104,6 +138,7 @@ public class ProductCartPresenterImpl implements ProductCartPresenter {
                 if (tab.getPosition() == 0) {
                     //get products
                     setTabColor(tlProductCart.getTabAt(1), R.color.colorPrimaryDark);
+                    fetchProducts();
                 } else if (tab.getPosition() == 1) {
                     //get cart products from the shared preference
                     setTabColor(tlProductCart.getTabAt(0), R.color.colorPrimaryDark);

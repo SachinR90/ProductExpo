@@ -3,7 +3,6 @@ package com.example.productexpo.application;
 import android.app.Application;
 
 import com.example.productexpo.BuildConfig;
-import com.example.productexpo.webservicemanager.OfflineCachingInterceptor;
 import com.ihsanbal.logging.Level;
 import com.ihsanbal.logging.LoggingInterceptor;
 
@@ -35,8 +34,8 @@ public class ProductExpoApp extends Application {
             OkHttpClient.Builder okHttpBuilder = new OkHttpClient.Builder();
             okHttpBuilder.readTimeout(MAX_REQUEST_TIMEOUT_MS, TimeUnit.MILLISECONDS)
                     .writeTimeout(MAX_REQUEST_TIMEOUT_MS, TimeUnit.MILLISECONDS)
-                    .connectTimeout(MAX_REQUEST_TIMEOUT_MS, TimeUnit.MILLISECONDS)
-                    .addInterceptor(new OfflineCachingInterceptor());
+                    .connectTimeout(MAX_REQUEST_TIMEOUT_MS, TimeUnit.MILLISECONDS);/*
+                    .addInterceptor(new OfflineCachingInterceptor());*/
             if (BuildConfig.IS_IN_DEBUG) {
                 LoggingInterceptor.Builder builder = new LoggingInterceptor.Builder()
                         .loggable(BuildConfig.IS_IN_DEBUG)

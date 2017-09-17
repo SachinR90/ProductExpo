@@ -18,7 +18,6 @@ public class VPAdapterProductCart extends FragmentStatePagerAdapter {
     private SparseArray<ProductCartView> registeredFragments = new SparseArray<>();
     private List<Fragment> listOfFragments = new ArrayList<>(0);
     private List<String> pageTitles = new ArrayList<>(0);
-
     public VPAdapterProductCart(FragmentManager fragmentManager) {
         super(fragmentManager);
     }
@@ -43,9 +42,7 @@ public class VPAdapterProductCart extends FragmentStatePagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         Fragment fragment = (Fragment) super.instantiateItem(container, position);
-        if (registeredFragments.valueAt(position) == null) {
-            registeredFragments.put(position, (ProductCartView) fragment);
-        }
+        registeredFragments.put(position, (ProductCartView) fragment);
         return fragment;
     }
 

@@ -1,5 +1,6 @@
 package com.example.productexpo.modules.home.product_cart.cart;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
@@ -69,6 +70,14 @@ public class CartFragment extends BaseFragment implements CartView {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser && presenter != null) {
             presenter.requestFocusOnEmptyView();
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (presenter!=null) {
+            presenter.onConfigChanged(newConfig);
         }
     }
 }

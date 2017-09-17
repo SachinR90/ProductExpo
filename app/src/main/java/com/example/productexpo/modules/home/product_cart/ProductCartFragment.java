@@ -1,10 +1,14 @@
 package com.example.productexpo.modules.home.product_cart;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.productexpo.R;
 import com.example.productexpo.modules.base.fragment.BaseFragment;
@@ -46,9 +50,17 @@ public class ProductCartFragment extends BaseFragment implements BaseFragmentVie
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //initialize the presenter
         presenter = new ProductCartPresenterImpl(this);
+        Log.i("CartProduct", "OnCreate");
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.i("CartProduct", "OnCreateView");
+        View v = super.onCreateView(inflater, container, savedInstanceState);
+        presenter.restoreInstance(savedInstanceState);
+        return v;
     }
 
     @Override
@@ -65,12 +77,23 @@ public class ProductCartFragment extends BaseFragment implements BaseFragmentVie
         // make presenter to perform business logic on these two views
         presenter.handleViewPager(vpProductCart);
         presenter.handleTabLayout(tlProductCart);
-
-        //select product tab by default
-        presenter.selectProductTab();
     }
 
     public void switchToProductTab() {
         presenter.selectProductTab();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (presenter != null) {
+            presenter.onConfigChanged(newConfig);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        presenter.saveInstance(outState);
+        super.onSaveInstanceState(outState);
     }
 }

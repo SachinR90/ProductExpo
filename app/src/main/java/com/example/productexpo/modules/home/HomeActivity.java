@@ -11,19 +11,23 @@ import com.example.productexpo.modules.base.activity.BaseActivity;
  */
 
 public class HomeActivity extends BaseActivity implements HomeView {
-    private Toolbar toolbar;
     HomePresenter presenter;
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new HomePresenterImpl(this);
         setContentView(R.layout.activity_home);
+        if (savedInstanceState == null) {
+            presenter = new HomePresenterImpl(this);
+            presenter.showProductCartFragment();
+        } else {
 
+        }
     }
 
     @Override
     public void initializeUIComponent() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        presenter.showProductCartFragment();
     }
 }

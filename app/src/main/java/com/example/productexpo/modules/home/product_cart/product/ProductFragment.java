@@ -1,8 +1,12 @@
 package com.example.productexpo.modules.home.product_cart.product;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.productexpo.R;
@@ -32,8 +36,18 @@ public class ProductFragment extends BaseFragment implements ProductView {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new ProductPresenterImpl(this);
+        Log.i("Product", "OnCreate");
+
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.i("Product", "OnCreateView");
+        View v = super.onCreateView(inflater, container, savedInstanceState);
+        presenter.restoreInstance(savedInstanceState);
+        return v;
+    }
     @Override
     public int getResId() {
         return R.layout.fragment_product;
@@ -50,7 +64,7 @@ public class ProductFragment extends BaseFragment implements ProductView {
 
     @Override
     public void updateProductList(List<Product> listOfProducts) {
-
+        presenter.updateProductList(listOfProducts);
     }
 
     @Override
@@ -60,4 +74,19 @@ public class ProductFragment extends BaseFragment implements ProductView {
             presenter.requestFocusOnEmptyView();
         }
     }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (presenter!=null) {
+            presenter.onConfigChanged(newConfig);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        presenter.saveInstance(outState);
+        super.onSaveInstanceState(outState);
+    }
+
 }

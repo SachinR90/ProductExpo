@@ -1,5 +1,6 @@
 package com.example.productexpo.modules.home.product_cart.cart;
 
+import android.content.res.Configuration;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -77,6 +78,11 @@ public class CartPresenterImpl implements CartPresenter, View.OnClickListener {
 
     @Override
     public void showErrorMessage(int errorCode, String message) {
+
+    }
+
+    @Override
+    public void onConfigChanged(Configuration configuration) {
 
     }
 }

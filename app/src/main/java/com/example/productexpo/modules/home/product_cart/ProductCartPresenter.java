@@ -1,5 +1,6 @@
 package com.example.productexpo.modules.home.product_cart;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 
@@ -14,6 +15,8 @@ import java.util.List;
  */
 
 public interface ProductCartPresenter extends BasePresenter {
+    String KEY_SELECTED_TAB = "TAB_SELECTED";
+
     /**
      * Method to set reference to View Pager
      *
@@ -32,6 +35,11 @@ public interface ProductCartPresenter extends BasePresenter {
      * perform selections on tab to select the Products tab
      */
     void selectProductTab();
+
+    /**
+     * perform selections on tab to select the Products tab
+     */
+    void selectCartTab();
 
     /**
      * fetch products from webservice
@@ -56,4 +64,8 @@ public interface ProductCartPresenter extends BasePresenter {
      * @param products
      */
     void onCartProductReceived(List<Product> products);
+
+    void restoreInstance(Bundle savedInstanceState);
+
+    void saveInstance(Bundle outState);
 }

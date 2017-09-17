@@ -3,9 +3,7 @@ package com.example.productexpo.webservicemanager;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.example.productexpo.R;
 import com.example.productexpo.application.ProductExpoApp;
-import com.example.productexpo.utils.AppUtils;
 import com.example.productexpo.webservicemanager.interfaces.ProgressListener;
 import com.example.productexpo.webservicemanager.interfaces.SyncListener;
 
@@ -47,9 +45,6 @@ class WebServiceManager {
      * @param clazz   - the response will be parsed according to this class
      */
     synchronized void callWebservice(Request request, final Class clazz) {
-        if (!AppUtils.checkIsInternetConnected(ProductExpoApp.getAppContext())) {
-            syncListener.onSyncFailure(request, null, (int) request.tag(), ProductExpoApp.getAppContext().getString(R.string.str_unable_to_connect_to_server));
-        }
         //use new builder to creates a shallow copy, so you can change some configuration while leaving everything else the same.
         final OkHttpClient newClient = client.newBuilder()
                 .addNetworkInterceptor(new ProgressInterceptor(syncListener))
