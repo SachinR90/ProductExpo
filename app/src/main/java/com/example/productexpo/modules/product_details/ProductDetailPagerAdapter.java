@@ -1,6 +1,7 @@
 package com.example.productexpo.modules.product_details;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.productexpo.R;
+import com.example.productexpo.customviews.IndeterminateCircularProgressDrawable;
 import com.example.productexpo.entities.Product;
 import com.example.productexpo.utils.AppUtils;
 import com.squareup.picasso.Picasso;
@@ -44,7 +46,15 @@ public class ProductDetailPagerAdapter extends PagerAdapter {
         View itemView = layoutInflater.inflate(R.layout.item_vp_product_details, container, false);
         if (product != null && !AppUtils.isCollectionEmpty(product.getProductGallery())) {
             ImageView imageView = (ImageView) itemView.findViewById(R.id.iv_product_gallery);
+
+            IndeterminateCircularProgressDrawable drawable =
+                    new IndeterminateCircularProgressDrawable(context
+                            , 3.0f
+                            , ContextCompat.getColor(context, R.color.colorPrimary)
+                            , ContextCompat.getColor(context, R.color.colorAccent)
+                    );
             Picasso.with(context).load(product.getProductGallery().get(position))
+                    .placeholder(drawable)
                     .into(imageView);
             container.addView(itemView);
         }

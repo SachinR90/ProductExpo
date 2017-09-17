@@ -5,22 +5,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="1dp"
     android:orientation="vertical"
-    android:padding="5dp"
     >
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/white"
+        android:layout_height="match_parent"
         app:cardCornerRadius="3dp"
         app:cardElevation="4dp"
+        app:cardUseCompatPadding="true"
         >
 
         <LinearLayout
             android:id="@+id/ll_home_grid_parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/transparent"
             android:gravity="center"
             android:orientation="vertical"
             >
@@ -29,9 +30,8 @@
                 android:id="@+id/iv_product_image"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:adjustViewBounds="true"
-                android:minHeight="40dp"
-                android:minWidth="40dp"
+                android:minHeight="48dp"
+                android:minWidth="48dp"
                 />
 
             <android.support.v7.widget.AppCompatTextView
@@ -78,15 +78,15 @@
                 android:id="@+id/btn_add_cart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/btn_bg_white_round_corner"
+                android:ems="5"
+                android:gravity="center"
                 android:minHeight="0dp"
                 android:padding="5dp"
-                android:background="@drawable/btn_bg_white_round_corner"
-                android:gravity="center"
-                android:textAllCaps="false"
-                android:ems="5"
                 android:text="@string/str_add_to_cart"
+                android:textAllCaps="false"
                 />
         </LinearLayout>
     </android.support.v7.widget.CardView>

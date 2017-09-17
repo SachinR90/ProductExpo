@@ -2,6 +2,7 @@ package com.example.productexpo.modules.home.product_cart.product;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.example.productexpo.R;
 import com.example.productexpo.customviews.CustomOnTouchListener;
+import com.example.productexpo.customviews.IndeterminateCircularProgressDrawable;
 import com.example.productexpo.customviews.ItemClickListenerRV;
 import com.example.productexpo.data.AppConstants;
 import com.example.productexpo.entities.Product;
@@ -50,8 +52,14 @@ public class RVAdapterProductList extends RecyclerView.Adapter<RecyclerView.View
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Product product = productList.get(position);
         ProductViewHolder rootHolder = (ProductViewHolder) holder;
+        IndeterminateCircularProgressDrawable drawable =
+                new IndeterminateCircularProgressDrawable(context
+                        , 3.0f
+                        , ContextCompat.getColor(context, R.color.colorPrimary)
+                        , ContextCompat.getColor(context, R.color.colorAccent)
+                );
 
-        Picasso.with(context).load(product.getProductImg()).into(rootHolder.ivHomeGridMenuImage);
+        Picasso.with(context).load(product.getProductImg()).placeholder(drawable).into(rootHolder.ivHomeGridMenuImage);
         rootHolder.tvRowProductName.setText(product.getProductName());
         rootHolder.tvRowProductPrice.setText("Price : \u20B9 " + product.getPrice());
         rootHolder.tvRowProductVendorName.setText("Vendor: " + product.getVendorName());
