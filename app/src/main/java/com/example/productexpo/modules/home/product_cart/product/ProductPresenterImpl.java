@@ -130,6 +130,7 @@ public class ProductPresenterImpl implements ProductPresenter, SwipeRefreshLayou
 
     @Override
     public void onRefresh() {
+        this.mSwipeRefreshLayout.setRefreshing(false);
         productView.refreshList();
     }
 
