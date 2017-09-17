@@ -1,5 +1,6 @@
 package com.example.productexpo.modules.base.fragment;
 
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 
 import com.example.productexpo.modules.base.BaseView;
@@ -17,31 +18,24 @@ public interface BaseFragmentView extends BaseView {
     int getResId();
 
     /**
-     * initialize all your views and objects in this method
-     *
-     * @param v rootLayout
-     */
-    void bindControls(View v);
-
-    /**
-     * set values to your views and objects in this method
-     */
-    void bindValues();
-
-    /**
-     * set listeners to your views and objects in this method
-     */
-    void bindListeners();
-
-    /**
-     * set adapter to the required views.
-     */
-    void bindAdapters();
-
-    /**
      * This is used to check if current activity is null or finishing
      *
      * @return true if finishing/null else false;
      */
     boolean isActivityFinishing();
+
+    /**
+     * Method to initialize UI components
+     *
+     * @param v root layout from which child views will be initialized
+     */
+    void initializeUIComponents(View v);
+
+
+    /**
+     * get Child Fragment Manager for fragment
+     *
+     * @return FragmentManager object returns Child FragmentManager
+     */
+    FragmentManager getChildManagerForFragment();
 }

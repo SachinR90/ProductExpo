@@ -7,8 +7,8 @@
     <string name="str_ok">OK</string>
     <string name="str_cancel">Cancel</string>
     <string name="str_unable_to_connect_to_server">Unable to connect to server</string>
-    <string name="str_menu_product_list">Products</string>
-    <string name="str_menu_cart_list">Cart</string>
+    <string name="str_product_list">Products</string>
+    <string name="str_cart_list">Cart</string>
     <string name="str_no_records_found">No Records Found !</string>
     <string name="str_total_price">Total Price  =  \u20B9</string>
     <string name="str_add_products_now">Tap to add products now</string>

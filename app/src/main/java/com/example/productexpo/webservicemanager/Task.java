@@ -19,7 +19,7 @@ public class Task {
      *
      * @param listener - listen to the response from the web service
      */
-    public Task(SyncListener listener,Class clazz) {
+    public Task(SyncListener listener) {
         webServiceManager = new WebServiceManager(listener);
     }
 

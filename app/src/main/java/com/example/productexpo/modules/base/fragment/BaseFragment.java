@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +26,6 @@ public abstract class BaseFragment extends Fragment implements BaseFragmentView 
      */
     private Context context;
 
-    private BaseFragmentPresenter baseFragmentPresenter;
-
     public BaseFragment() {
         //required empty constructor
     }
@@ -41,12 +40,6 @@ public abstract class BaseFragment extends Fragment implements BaseFragmentView 
     public void onAttach(Context context) {
         super.onAttach(context);
         this.context = context;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        baseFragmentPresenter = new BaseFragmentPresenterImpl(this);
     }
 
     /**
@@ -64,7 +57,7 @@ public abstract class BaseFragment extends Fragment implements BaseFragmentView 
             return null;
         }
         View rootLayout = inflater.inflate(resId, container, false);
-        baseFragmentPresenter.initializeViewAndObject(rootLayout);
+        initializeUIComponents(rootLayout);
         return rootLayout;
     }
 
@@ -119,5 +112,10 @@ public abstract class BaseFragment extends Fragment implements BaseFragmentView 
         } catch (Exception ex) {
 
         }
+    }
+
+    @Override
+    public FragmentManager getChildManagerForFragment() {
+        return getChildFragmentManager();
     }
 }

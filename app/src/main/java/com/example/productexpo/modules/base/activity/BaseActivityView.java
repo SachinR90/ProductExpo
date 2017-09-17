@@ -1,5 +1,7 @@
 package com.example.productexpo.modules.base.activity;
 
+import android.support.v4.app.FragmentManager;
+
 import com.example.productexpo.modules.base.BaseView;
 
 /**
@@ -7,11 +9,14 @@ import com.example.productexpo.modules.base.BaseView;
  */
 
 public interface BaseActivityView extends BaseView {
-    void bindControls();
 
-    void bindValues();
+    /**
+     * initialize the UI components
+     */
+    void initializeUIComponent();
 
-    void bindListeners();
-
-    void bindAdapters();
+    /**
+     * this is used to get the FragmentManager object.
+     */
+    FragmentManager getManagerForFragment();
 }
