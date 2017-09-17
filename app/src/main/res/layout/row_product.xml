@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.productexpo.customviews.CustomFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp"
+    >
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="4dp"
+        >
+
+        <LinearLayout
+            android:id="@+id/ll_home_grid_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            >
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/iv_product_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:minHeight="40dp"
+                android:minWidth="40dp"
+                />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_row_product_name"
+                style="@style/textMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                tools:text="Product Name"
+                />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_row_product_price"
+                style="@style/textSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                tools:text="Product Name"
+                />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_row_product_vendor_name"
+                style="@style/textSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                tools:text="Product Name"
+                />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_row_product_vendor_address"
+                style="@style/textSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                tools:text="Product Name"
+                />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_add_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:minHeight="0dp"
+                android:padding="5dp"
+                android:background="@drawable/btn_bg_white_round_corner"
+                android:gravity="center"
+                android:textAllCaps="false"
+                android:ems="5"
+                android:text="@string/str_add_to_cart"
+                />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</com.example.productexpo.customviews.CustomFrameLayout>
