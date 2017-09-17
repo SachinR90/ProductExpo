@@ -52,4 +52,12 @@ public class ProductFragment extends BaseFragment implements ProductView {
     public void updateProductList(List<Product> listOfProducts) {
 
     }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && presenter!=null) {
+            presenter.requestFocusOnEmptyView();
+        }
+    }
 }

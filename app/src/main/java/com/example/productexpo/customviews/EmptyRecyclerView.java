@@ -29,7 +29,6 @@ public class EmptyRecyclerView extends RecyclerView {
             checkIfEmpty();
         }
     };
-
     public EmptyRecyclerView(Context context) {
         this(context, null);
     }
@@ -40,6 +39,10 @@ public class EmptyRecyclerView extends RecyclerView {
 
     public EmptyRecyclerView(Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+    }
+
+    public View getEmptyView() {
+        return emptyView;
     }
 
     public void setEmptyView(View emptyView) {

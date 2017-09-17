@@ -17,4 +17,10 @@ public interface ProductPresenter extends BasePresenter{
      * @param emptyView    to be set to EmptyRecyclerView
      */
     void handleEmptyRecyclerView(EmptyRecyclerView recyclerView, View emptyView);
+
+    /**
+     * request focus on empty
+     */
+    void requestFocusOnEmptyView();
+
 }

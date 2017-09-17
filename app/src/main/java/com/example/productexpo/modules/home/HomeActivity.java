@@ -12,29 +12,18 @@ import com.example.productexpo.modules.base.activity.BaseActivity;
 
 public class HomeActivity extends BaseActivity implements HomeView {
     private Toolbar toolbar;
+    HomePresenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        presenter = new HomePresenterImpl(this);
         setContentView(R.layout.activity_home);
+
     }
 
     @Override
-    public void bindControls() {
+    public void initializeUIComponent() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-    }
-
-    @Override
-    public void bindValues() {
-
-    }
-
-    @Override
-    public void bindListeners() {
-
-    }
-
-    @Override
-    public void bindAdapters() {
-
+        presenter.showProductCartFragment();
     }
 }

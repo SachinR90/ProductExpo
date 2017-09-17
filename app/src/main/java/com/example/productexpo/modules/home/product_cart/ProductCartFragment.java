@@ -65,6 +65,9 @@ public class ProductCartFragment extends BaseFragment implements BaseFragmentVie
         // make presenter to perform business logic on these two views
         presenter.handleViewPager(vpProductCart);
         presenter.handleTabLayout(tlProductCart);
+
+        //select product tab by default
+        presenter.selectProductTab();
     }
 
     public void switchToProductTab() {

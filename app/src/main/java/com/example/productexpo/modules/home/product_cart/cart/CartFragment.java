@@ -1,6 +1,8 @@
 package com.example.productexpo.modules.home.product_cart.cart;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -17,8 +19,10 @@ import java.util.List;
  */
 
 public class CartFragment extends BaseFragment implements CartView {
-    private EmptyRecyclerView rvProduct;
+    private EmptyRecyclerView rvCart;
     private LinearLayout llHistoryEmptyView;
+    private CartPresenter presenter;
+    private AppCompatTextView tvTotalPrice;
 
     public static CartFragment newInstance() {
         Bundle args = new Bundle();
@@ -28,14 +32,25 @@ public class CartFragment extends BaseFragment implements CartView {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        //initialize the presenter
+        presenter = new CartPresenterImpl(this);
+    }
+
+    @Override
     public int getResId() {
         return R.layout.fragment_cart;
     }
 
     @Override
     public void initializeUIComponents(View v) {
-        rvProduct = (EmptyRecyclerView) v.findViewById(R.id.rv_product);
+        rvCart = (EmptyRecyclerView) v.findViewById(R.id.rv_cart);
         llHistoryEmptyView = (LinearLayout) v.findViewById(R.id.ll_cart_empty_view);
+        tvTotalPrice = (AppCompatTextView) v.findViewById(R.id.tv_total_price);
+        presenter.handleEmptyRecyclerView(rvCart, llHistoryEmptyView);
+        presenter.handlePriceText(tvTotalPrice);
     }
 
     @Override
@@ -46,6 +61,14 @@ public class CartFragment extends BaseFragment implements CartView {
     @Override
     public void switchToProductScreen() {
         ProductCartFragment parentFragment = (ProductCartFragment) getParentFragment();
+        parentFragment.switchToProductTab();
+    }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && presenter != null) {
+            presenter.requestFocusOnEmptyView();
+        }
     }
 }

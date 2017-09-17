@@ -13,5 +13,6 @@
     <string name="str_total_price">Total Price  =  \u20B9</string>
     <string name="str_add_products_now">Tap to add products now</string>
     <string name="str_cart_empty">Cart is Empty</string>
+    <string name="str_pls_wait">Please wait</string>
 
 </resources>

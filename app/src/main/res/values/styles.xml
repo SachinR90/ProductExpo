@@ -3,10 +3,11 @@
     <style name="CommonTabLayout">
         <item name="android:layout_height">38dp</item>
         <item name="tabGravity">fill</item>
+        <item name="tabMaxWidth">0dp</item>
         <item name="tabMode">fixed</item>
         <item name="tabIndicatorHeight">0dp</item>
         <item name="tabTextColor">@color/colorPrimaryDark</item>
-        <item name="tabSelectedTextColor">@color/colorAccent</item>
+        <item name="tabSelectedTextColor">@color/white</item>
         <item name="tabBackground">@drawable/tab_drawable</item>
     </style>
 

@@ -5,4 +5,6 @@ package com.example.productexpo.modules.base;
  */
 
 public interface BasePresenter{
+
+    void showErrorMessage(int errorCode, String message);
 }

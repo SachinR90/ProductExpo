@@ -30,7 +30,7 @@ public class ProductCartInteractorImpl implements ProductCartInteractor {
 
     @Override
     public void onSyncFailure(Request request, Object result, int webServiceId, String errorMessage) {
-
+        presenter.showErrorMessage(0,errorMessage);
     }
 
     @Override
