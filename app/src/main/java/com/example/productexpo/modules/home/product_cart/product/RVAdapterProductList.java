@@ -1,5 +1,6 @@
 package com.example.productexpo.modules.home.product_cart.product;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
@@ -10,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.productexpo.R;
+import com.example.productexpo.customviews.CustomOnTouchListener;
+import com.example.productexpo.customviews.ItemClickListenerRV;
+import com.example.productexpo.data.AppConstants;
 import com.example.productexpo.entities.Product;
 import com.squareup.picasso.Picasso;
 
@@ -22,10 +26,12 @@ import static android.view.LayoutInflater.from;
  * Created on 9/17/2017.
  */
 
-public class RVAdapterProductList extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+@SuppressWarnings("unchecked")
+public class RVAdapterProductList extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
     private ArrayList<Product> productList;
     private LayoutInflater inflater;
     private Context context;
+    private ItemClickListenerRV clickListener;
 
     public RVAdapterProductList(Context context, ArrayList<Product> productList) {
         this.productList = productList;
@@ -39,6 +45,7 @@ public class RVAdapterProductList extends RecyclerView.Adapter<RecyclerView.View
         return new ProductViewHolder(v);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Product product = productList.get(position);
@@ -49,6 +56,16 @@ public class RVAdapterProductList extends RecyclerView.Adapter<RecyclerView.View
         rootHolder.tvRowProductPrice.setText("Price : \u20B9 " + product.getPrice());
         rootHolder.tvRowProductVendorName.setText("Vendor: " + product.getVendorName());
         rootHolder.tvRowProductVendorAddress.setText("Address: " + product.getVendorAddress());
+
+
+        rootHolder.btnAddCart.setOnClickListener(this);
+        rootHolder.llHomeGridParent.setOnTouchListener(new CustomOnTouchListener());
+
+        rootHolder.btnAddCart.setOnClickListener(this);
+        rootHolder.llHomeGridParent.setOnTouchListener(new CustomOnTouchListener());
+
+        rootHolder.btnAddCart.setTag(AppConstants.TAG_KEY, position);
+        rootHolder.llHomeGridParent.setTag(AppConstants.TAG_KEY, position);
     }
 
     @Override
@@ -67,6 +84,26 @@ public class RVAdapterProductList extends RecyclerView.Adapter<RecyclerView.View
 
     public ArrayList<Product> getData() {
         return this.productList;
+    }
+
+    public void setClickListener(ItemClickListenerRV clickListener) {
+        this.clickListener = clickListener;
+    }
+
+    @Override
+    public void onClick(View v) {
+        int pos;
+        if (clickListener != null) {
+            pos = (int) v.getTag(AppConstants.TAG_KEY);
+            switch (v.getId()) {
+                case R.id.ll_home_grid_parent:
+                    //show product gallery
+                    break;
+                case R.id.btn_add_cart:
+                    clickListener.onItemClick(v, pos, productList.get(pos), null);
+                    break;
+            }
+        }
     }
 
     private static class ProductViewHolder extends RecyclerView.ViewHolder {

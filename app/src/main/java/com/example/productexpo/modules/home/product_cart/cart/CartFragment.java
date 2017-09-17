@@ -1,6 +1,8 @@
 package com.example.productexpo.modules.home.product_cart.cart;
 
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
@@ -11,7 +13,7 @@ import com.example.productexpo.R;
 import com.example.productexpo.customviews.EmptyRecyclerView;
 import com.example.productexpo.entities.Product;
 import com.example.productexpo.modules.base.fragment.BaseFragment;
-import com.example.productexpo.modules.home.product_cart.ProductCartFragment;
+import com.example.productexpo.modules.home.product_cart.ProductCartView;
 
 import java.util.List;
 
@@ -56,13 +58,25 @@ public class CartFragment extends BaseFragment implements CartView {
 
     @Override
     public void updateProductList(List<Product> listOfProducts) {
+        presenter.updateProductList(listOfProducts);
+    }
+
+    @Override
+    public void showProductGallery(Product product) {
 
     }
 
     @Override
     public void switchToProductScreen() {
-        ProductCartFragment parentFragment = (ProductCartFragment) getParentFragment();
+        ProductCartView parentFragment = (ProductCartView) getParentFragment();
         parentFragment.switchToProductTab();
+    }
+
+    @Override
+    public void callVendor(String phoneNumber) {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:" + phoneNumber));
+        startActivity(intent);
     }
 
     @Override
@@ -70,6 +84,7 @@ public class CartFragment extends BaseFragment implements CartView {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser && presenter != null) {
             presenter.requestFocusOnEmptyView();
+            presenter.refreshCartList();
         }
     }
 

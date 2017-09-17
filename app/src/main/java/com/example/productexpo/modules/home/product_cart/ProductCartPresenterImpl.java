@@ -8,12 +8,15 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 
 import com.example.productexpo.R;
+import com.example.productexpo.data.Preferences;
 import com.example.productexpo.entities.Product;
 import com.example.productexpo.entities.ProductResponse;
 import com.example.productexpo.modules.base.fragment.BaseFragmentView;
 import com.example.productexpo.modules.home.product_cart.cart.CartFragment;
 import com.example.productexpo.modules.home.product_cart.product.ProductFragment;
+import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -82,19 +85,30 @@ public class ProductCartPresenterImpl implements ProductCartPresenter {
         productCartView.hideProgress();
         if (vpProductCart != null) {
             VPAdapterProductCart adapter = (VPAdapterProductCart) vpProductCart.getAdapter();
-            ProductCartView productCartView = adapter.getRegisteredFragment(0);
-            productCartView.updateProductList(productResponse.getProducts());
+            ProductCartCallback productCartCallback = adapter.getRegisteredFragment(0);
+            productCartCallback.updateProductList(productResponse.getProducts());
         }
     }
 
     @Override
     public void fetchCartProducts() {
-
+        Preferences instance = Preferences.getInstance();
+        String objectAsString = instance.getObjectAsString(Preferences.Key.KEY_CART_LIST);
+        try {
+            ProductResponse productResponse = new Gson().fromJson(objectAsString, ProductResponse.class);
+            onCartProductReceived(productResponse.getProducts());
+        } catch (Exception ex) {
+            onCartProductReceived(new ArrayList<Product>());
+        }
     }
 
     @Override
     public void onCartProductReceived(List<Product> products) {
-
+        if (vpProductCart != null) {
+            VPAdapterProductCart adapter = (VPAdapterProductCart) vpProductCart.getAdapter();
+            ProductCartCallback productCartCallback = adapter.getRegisteredFragment(1);
+            productCartCallback.updateProductList(products);
+        }
     }
 
     @Override
@@ -138,10 +152,10 @@ public class ProductCartPresenterImpl implements ProductCartPresenter {
                 if (tab.getPosition() == 0) {
                     //get products
                     setTabColor(tlProductCart.getTabAt(1), R.color.colorPrimaryDark);
-                    fetchProducts();
                 } else if (tab.getPosition() == 1) {
                     //get cart products from the shared preference
                     setTabColor(tlProductCart.getTabAt(0), R.color.colorPrimaryDark);
+                    fetchCartProducts();
                 }
             } catch (Exception ignored) {
 
@@ -164,6 +178,7 @@ public class ProductCartPresenterImpl implements ProductCartPresenter {
                 } else if (tab.getPosition() == 1) {
                     //get cart products from the shared preference
                     setTabColor(tlProductCart.getTabAt(0), R.color.colorPrimaryDark);
+                    fetchCartProducts();
                 }
             } catch (Exception ignored) {
 

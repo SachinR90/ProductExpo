@@ -15,7 +15,7 @@ import java.util.List;
 
 public class VPAdapterProductCart extends FragmentStatePagerAdapter {
     // Sparse array to keep track of registered fragments in memory
-    private SparseArray<ProductCartView> registeredFragments = new SparseArray<>();
+    private SparseArray<ProductCartCallback> registeredFragments = new SparseArray<>();
     private List<Fragment> listOfFragments = new ArrayList<>(0);
     private List<String> pageTitles = new ArrayList<>(0);
     public VPAdapterProductCart(FragmentManager fragmentManager) {
@@ -34,7 +34,7 @@ public class VPAdapterProductCart extends FragmentStatePagerAdapter {
 
     public void add(int pos, Fragment fragment, String title) {
         listOfFragments.add(fragment);
-        registeredFragments.put(pos, (ProductCartView) fragment);
+        registeredFragments.put(pos, (ProductCartCallback) fragment);
         pageTitles.add(title);
     }
 
@@ -42,7 +42,7 @@ public class VPAdapterProductCart extends FragmentStatePagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         Fragment fragment = (Fragment) super.instantiateItem(container, position);
-        registeredFragments.put(position, (ProductCartView) fragment);
+        registeredFragments.put(position, (ProductCartCallback) fragment);
         return fragment;
     }
 
@@ -54,7 +54,7 @@ public class VPAdapterProductCart extends FragmentStatePagerAdapter {
     }
 
     // Returns the fragment for the position (if instantiated)
-    public ProductCartView getRegisteredFragment(int position) {
+    public ProductCartCallback getRegisteredFragment(int position) {
         return registeredFragments.get(position);
     }
 

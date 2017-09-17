@@ -6,12 +6,18 @@
     android:background="@color/white"
     >
 
-    <com.example.productexpo.customviews.EmptyRecyclerView
-        android:id="@+id/rv_product"
+    <com.example.productexpo.customviews.CustomSwipeToRefresh
+        android:id="@+id/strProduct"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/transparent"
-        />
+        >
+        <com.example.productexpo.customviews.EmptyRecyclerView
+            android:id="@+id/rv_product"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            />
+    </com.example.productexpo.customviews.CustomSwipeToRefresh>
 
     <TextView
         android:id="@id/tv_no_data_found"

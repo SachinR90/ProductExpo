@@ -12,13 +12,12 @@ import android.view.ViewGroup;
 
 import com.example.productexpo.R;
 import com.example.productexpo.modules.base.fragment.BaseFragment;
-import com.example.productexpo.modules.base.fragment.BaseFragmentView;
 
 /**
  * Created on 9/17/2017.
  */
 
-public class ProductCartFragment extends BaseFragment implements BaseFragmentView {
+public class ProductCartFragment extends BaseFragment implements ProductCartView {
     /**
      * contains two tabs<br>
      * <li> Product</li>
@@ -79,10 +78,6 @@ public class ProductCartFragment extends BaseFragment implements BaseFragmentVie
         presenter.handleTabLayout(tlProductCart);
     }
 
-    public void switchToProductTab() {
-        presenter.selectProductTab();
-    }
-
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
@@ -95,5 +90,15 @@ public class ProductCartFragment extends BaseFragment implements BaseFragmentVie
     public void onSaveInstanceState(Bundle outState) {
         presenter.saveInstance(outState);
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void switchToProductTab() {
+        presenter.selectProductTab();
+    }
+
+    @Override
+    public void refreshList() {
+        presenter.fetchProducts();
     }
 }

@@ -3,6 +3,7 @@ package com.example.productexpo.modules.home.product_cart.product;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.example.productexpo.R;
 import com.example.productexpo.customviews.EmptyRecyclerView;
 import com.example.productexpo.entities.Product;
 import com.example.productexpo.modules.base.fragment.BaseFragment;
+import com.example.productexpo.modules.home.product_cart.ProductCartView;
 
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class ProductFragment extends BaseFragment implements ProductView {
     ProductPresenter presenter;
     private EmptyRecyclerView rvProduct;
     private TextView tvNoDataFound;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     public static ProductFragment newInstance() {
         Bundle args = new Bundle();
@@ -48,6 +51,7 @@ public class ProductFragment extends BaseFragment implements ProductView {
         presenter.restoreInstance(savedInstanceState);
         return v;
     }
+
     @Override
     public int getResId() {
         return R.layout.fragment_product;
@@ -57,9 +61,10 @@ public class ProductFragment extends BaseFragment implements ProductView {
     public void initializeUIComponents(View v) {
         rvProduct = (EmptyRecyclerView) v.findViewById(R.id.rv_product);
         tvNoDataFound = (TextView) v.findViewById(R.id.tv_no_data_found);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.strProduct);
 
         //make presenter handle the empty textview and RecyclerView
-        presenter.handleEmptyRecyclerView(rvProduct, tvNoDataFound);
+        presenter.handleEmptyRecyclerView(rvProduct, tvNoDataFound, mSwipeRefreshLayout);
     }
 
     @Override
@@ -70,7 +75,7 @@ public class ProductFragment extends BaseFragment implements ProductView {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser && presenter!=null) {
+        if (isVisibleToUser && presenter != null) {
             presenter.requestFocusOnEmptyView();
         }
     }
@@ -78,7 +83,7 @@ public class ProductFragment extends BaseFragment implements ProductView {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        if (presenter!=null) {
+        if (presenter != null) {
             presenter.onConfigChanged(newConfig);
         }
     }
@@ -89,4 +94,14 @@ public class ProductFragment extends BaseFragment implements ProductView {
         super.onSaveInstanceState(outState);
     }
 
+    @Override
+    public void refreshList() {
+        ProductCartView productCartView = (ProductCartView) getParentFragment();
+        productCartView.refreshList();
+    }
+
+    @Override
+    public void showProductGallery(Product product) {
+
+    }
 }
