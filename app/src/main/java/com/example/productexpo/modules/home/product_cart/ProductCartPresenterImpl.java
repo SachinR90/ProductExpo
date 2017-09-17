@@ -61,14 +61,14 @@ public class ProductCartPresenterImpl implements ProductCartPresenter {
     public void selectProductTab() {
         this.tlProductCart.getTabAt(0).select();
         setTabColor(this.tlProductCart.getTabAt(0), R.color.white);
-        setTabColor(this.tlProductCart.getTabAt(1), R.color.colorPrimaryDark);
+        setTabColor(this.tlProductCart.getTabAt(1), R.color.colorPrimaryLight);
     }
 
     @Override
     public void selectCartTab() {
         this.tlProductCart.getTabAt(1).select();
         setTabColor(this.tlProductCart.getTabAt(1), R.color.white);
-        setTabColor(this.tlProductCart.getTabAt(0), R.color.colorPrimaryDark);
+        setTabColor(this.tlProductCart.getTabAt(0), R.color.colorPrimaryLight);
     }
 
     private void setTabColor(TabLayout.Tab tab, int color) {
@@ -152,10 +152,10 @@ public class ProductCartPresenterImpl implements ProductCartPresenter {
                 setTabColor(tab, R.color.white);
                 if (tab.getPosition() == 0) {
                     //get products
-                    setTabColor(tlProductCart.getTabAt(1), R.color.colorPrimaryDark);
+                    setTabColor(tlProductCart.getTabAt(1), R.color.colorPrimaryLight);
                 } else if (tab.getPosition() == 1) {
                     //get cart products from the shared preference
-                    setTabColor(tlProductCart.getTabAt(0), R.color.colorPrimaryDark);
+                    setTabColor(tlProductCart.getTabAt(0), R.color.colorPrimaryLight);
                     fetchCartProducts();
                 }
             } catch (Exception ignored) {
@@ -175,10 +175,10 @@ public class ProductCartPresenterImpl implements ProductCartPresenter {
                 setTabColor(tab, R.color.white);
                 if (tab.getPosition() == 0) {
                     //get products
-                    setTabColor(tlProductCart.getTabAt(1), R.color.colorPrimaryDark);
+                    setTabColor(tlProductCart.getTabAt(1), R.color.colorPrimaryLight);
                 } else if (tab.getPosition() == 1) {
                     //get cart products from the shared preference
-                    setTabColor(tlProductCart.getTabAt(0), R.color.colorPrimaryDark);
+                    setTabColor(tlProductCart.getTabAt(0), R.color.colorPrimaryLight);
                     fetchCartProducts();
                 }
             } catch (Exception ignored) {

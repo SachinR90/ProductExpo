@@ -6,7 +6,7 @@
         <item name="tabMaxWidth">0dp</item>
         <item name="tabMode">fixed</item>
         <item name="tabIndicatorHeight">0dp</item>
-        <item name="tabTextColor">@color/colorPrimaryDark</item>
+        <item name="tabTextColor">@color/colorPrimaryLight</item>
         <item name="tabSelectedTextColor">@color/white</item>
         <item name="tabBackground">@drawable/tab_drawable</item>
     </style>
